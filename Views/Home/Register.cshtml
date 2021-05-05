@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Rejestracja";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/LoginStyle.css" type="text/css" />
+    <script>
+        let passInput;
+        let passInput2;
+        let samePass = true;
+        function checkPassword() {
+            if (passInput.value != passInput2.value) {
+                samePass = false;
+                passInput2.style.border = "2px solid red";
+            } else {
+                samePass = true;
+                passInput2.style.border = "2px solid green";
+            }
+        }
+        $(document).ready(function () {
+            passInput = document.getElementById("pass");
+            passInput2 = document.getElementById("pass2");
+        });
+    </script>
+</head>
+<body>
+    <div class="banner">
+        <p class="banner_title">MechanicApp</p>
+    </div>
+    <div class="wrapper">
+        <div class="form">
+            <form>
+                <p class="frame_label">Login</p>
+                <input type="text" /><br><br>
+                <p class="frame_label">Hasło</p>
+                <input id="pass" type="password" oninput="checkPassword()"/><br><br>
+                <p class="frame_label">Powtórz hasło</p>
+                <input id="pass2" type="password" oninput="checkPassword()"/><br><br>
+                <div class="submit"><span>Zarejestruj się</span></div>
+                <input type="submit" style="visibility: hidden; position: absolute;" />
+            </form>
+        </div>
+    </div>
+</body>
+</html>

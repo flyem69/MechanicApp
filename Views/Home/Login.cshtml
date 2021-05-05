@@ -1,0 +1,29 @@
+﻿@{ 
+    ViewBag.Title = "Logowanie";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/LoginStyle.css" type="text/css" />
+</head>
+<body>
+    <div class="banner">
+        <p class="banner_title">MechanicApp</p>
+    </div>
+    <div class="wrapper">
+        <div class="form">
+            <form>
+                <p class="frame_label">Login</p>
+                <input type="text" /><br><br>
+                <p class="frame_label">Hasło</p>
+                <input type="password" /><br><br>
+                <div class="submit"><span>Zaloguj się</span></div>
+                <input type="submit" style="visibility: hidden; position: absolute;" />
+            </form>
+        </div><br>
+        <span class="new_account" onclick="location.href = '@Url.Action("Register", "Home")'">Nie masz konta?</span>
+    </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+﻿.banner {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.banner_title {
+    font-size: 50px;
+    color: orange;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+div.form {
+    display: inline-block;
+    vertical-align: top;
+    padding: 16px;
+    background-color: dimgray;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.frame_label {
+    font-weight: bold;
+    color: white;
+    margin: 0px;
+    font-size: 15px;
+}
+
+input:not([type='submit']) {
+    width: 200px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input:not([type='submit']):focus {
+    border: 2px solid #fcb045;
+}
+
+#pass2 {
+    border: 2px solid green;
+}
+
+#pass2:focus {
+    border: 2px solid green;
+}
+
+div.submit {
+    display: inline-block;
+    background-color: orange;
+    transition: all 0.35s;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+div.submit:hover {
+    background-color: black;
+}
+
+div.submit span {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    transition: all 0.35s;
+}
+
+div.submit:hover span {
+    color: white;
+}
+
+.new_account {
+    color: white;
+    transition: all 0.35s;
+    cursor: pointer;
+}
+
+.new_account:hover{
+    color: orange;
+}
