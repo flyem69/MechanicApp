@@ -21,6 +21,12 @@ namespace MechanicApp.Controllers {
         public ActionResult Register() {
             return View();
         }
+        /*
+         *  SHA512 hasher = new SHA512Managed();
+            byte[] pass = Encoding.Unicode.GetBytes("123452");
+            byte[] res = hasher.ComputeHash(pass);
+            Convert.ToBase64String(res);
+         */
 
         public ActionResult Job(int id)
         {
@@ -37,7 +43,7 @@ namespace MechanicApp.Controllers {
             job.Defects = defects;
             jobsDB.Jobs.Add(job);
             jobsDB.SaveChanges();*/
-            var tmpjob = jobsDB.Jobs.Include(j => j.Defects).SingleOrDefault(j => j.Id == id);
+            Job tmpjob = jobsDB.Jobs.Include(j => j.Defects).SingleOrDefault(j => j.Id == id);
             return View(tmpjob);
         }
 

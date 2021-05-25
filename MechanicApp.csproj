@@ -344,6 +344,7 @@
     <Compile Include="Models\FirebaseAdminSDK.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
