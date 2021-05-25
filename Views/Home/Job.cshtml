@@ -1,0 +1,44 @@
+﻿@model MechanicApp.Models.Job
+
+@{
+    ViewBag.title = "";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/Job.css" type="text/css" />
+    <title></title>
+</head>
+<body>
+    <div class="title">
+        <ul class="pager">
+            <li class="previous"><a onclick="location.href = '@Url.Action("/", "Home")'">Cofnij</a></li>
+        </ul>
+        <!--<button class="previous btn-primary btn-lg" onclick="location.href = '@Url.Action("Register","Home")'">Cofnij</button><br />-->
+        <h2>Id naprawy: @Html.DisplayFor(model => model.Id)</h2>
+    </div>
+    <div class="text_normal">
+        <div>
+            <table class="repair_table table">
+                <tr><td>Data przyjęcia</td><td>20.05.2021</td></tr>
+                <tr><td>Marka</td><td>@Html.DisplayFor(model => model.CarManufacturer)</td></tr>
+                <tr><td>Model</td><td>@Html.DisplayFor(model => model.CarModel)</td></tr>
+                <tr><td>Nazwa klienta</td><td>@Html.DisplayFor(model => model.ClientName)</td></tr>
+                <tr><td>Telefon klienta</td><td>@Html.DisplayFor(model => model.ClientPhoneNumber)</td></tr>
+            </table>
+        </div>
+        Uszkodzenia:<br />
+        <ul>
+            @for(int i = 0; i < Model.Defects.Count; i++)
+            {
+                <li>@Model.Defects[i].Name</li>
+            }
+        </ul>
+    </div>
+</body>
+</html>
+
+

@@ -1,0 +1,23 @@
+﻿body {
+}
+
+.title
+{
+    color: orange;
+    text-align: center;
+}
+
+.text_normal
+{
+    color: white;
+}
+
+.repair_table
+{
+    color: white;
+    background-color: gray;
+    margin: 10px;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
