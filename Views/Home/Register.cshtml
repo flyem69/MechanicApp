@@ -13,6 +13,12 @@
         let passInput;
         let passInput2;
         let samePass = true;
+        let buttonLock = false;
+        $(document).ready(function () {
+            passInput = document.getElementById("pass");
+            passInput2 = document.getElementById("pass2");
+        });
+
         function checkPassword() {
             if (passInput.value != passInput2.value) {
                 samePass = false;
@@ -22,10 +28,38 @@
                 passInput2.style.border = "2px solid green";
             }
         }
-        $(document).ready(function () {
-            passInput = document.getElementById("pass");
-            passInput2 = document.getElementById("pass2");
-        });
+
+        function signUp() {
+            if (samePass) {
+                if (!buttonLock) {
+                    buttonLock = true;
+                    var inputs = document.getElementById("register_form").elements;
+                    $.ajax({
+                        url: '@Url.Action("SignUp", "Home")?login=' + inputs[0].value + '&pass=' + inputs[1].value,
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (data) {
+                            var result = data.result;
+                            if (result == "ok") {
+                                showToast("Dodano użytkownika do bazy");
+                            } else if (result == "exists") {
+                                showToast("Nazwa użytkownika już istnieje");
+                            } else if (result == "size") {
+                                showToast("Nieprawidłowy rozmiar loginu lub hasła");
+                            }
+                        },
+                        error: function (ex) {
+                            alert("dupa");
+                        },
+                        complete: function () {
+                            buttonLock = false;
+                        }
+                    });
+                }
+            } else {
+                showToast("Błędnie powtórzone hasło");
+            }
+        }
     </script>
 </head>
 <body>
@@ -34,16 +68,20 @@
     </div>
     <div class="wrapper">
         <div class="form">
-            <form>
+            <form id="register_form">
                 <p class="frame_label">Login</p>
                 <input type="text" /><br><br>
                 <p class="frame_label">Hasło</p>
-                <input id="pass" type="password" oninput="checkPassword()"/><br><br>
+                <input id="pass" type="password" oninput="checkPassword()" /><br><br>
                 <p class="frame_label">Powtórz hasło</p>
-                <input id="pass2" type="password" oninput="checkPassword()"/><br><br>
-                <div class="submit"><span>Zarejestruj się</span></div>
+                <input id="pass2" type="password" oninput="checkPassword()" /><br><br>
+                <div class="submit" onclick="signUp()"><span>Zarejestruj się</span></div>
                 <input type="submit" style="visibility: hidden; position: absolute;" />
             </form>
+        </div><br><br>
+        <div class="additional_option" onclick="location.href = '@Url.Action("Index", "Home")'">
+            Masz już konto?<br>
+            Zaloguj się
         </div>
     </div>
 </body>

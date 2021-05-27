@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MechanicApp - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Scripts/js");
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -13,6 +14,7 @@
     <div class="container body-content">
         @RenderBody()
     </div>
+    <div id="toast"></div>
     @RenderSection("scripts", required: false)
 </body>
 </html>

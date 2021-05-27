@@ -18,7 +18,7 @@ namespace MechanicApp.Models
         public string Password { set
             {
                 SHA512 hasher = new SHA512Managed();
-                byte[] pass = Encoding.Unicode.GetBytes("123452");
+                byte[] pass = Encoding.Unicode.GetBytes(value);
                 byte[] res = hasher.ComputeHash(pass);
                 HashedPassword = Convert.ToBase64String(res);
             } }

@@ -21,7 +21,12 @@ namespace MechanicApp {
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/External/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/Toast.css"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/js").Include(
+                "~/Scripts/Toast.js"
+                ));
         }
     }
 }

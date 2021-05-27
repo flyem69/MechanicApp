@@ -54,7 +54,7 @@ div.submit {
     background-color: orange;
     transition: all 0.35s;
     cursor: pointer;
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
     border-radius: 8px;
 }
 
@@ -73,12 +73,13 @@ div.submit:hover span {
     color: white;
 }
 
-.new_account {
+div.additional_option {
+    display: inline-block;
     color: white;
     transition: all 0.35s;
     cursor: pointer;
 }
 
-.new_account:hover{
+div.additional_option:hover{
     color: orange;
 }

@@ -54,9 +54,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="FirebaseAdmin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=97c8d00c348326ed, processorArchitecture=MSIL">
-      <HintPath>packages\FirebaseAdmin.2.1.0\lib\net461\FirebaseAdmin.dll</HintPath>
-    </Reference>
     <Reference Include="Google.Api.Gax, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
       <HintPath>packages\Google.Api.Gax.3.2.0\lib\net461\Google.Api.Gax.dll</HintPath>
     </Reference>
@@ -334,14 +331,12 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\FirebaseAdminSDKInit.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Defect.cs" />
-    <Compile Include="Models\FirebaseAdminSDK.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\User.cs" />
@@ -354,6 +349,7 @@
     <Content Include="Content\External\bootstrap.min.css" />
     <Content Include="Content\Job.css" />
     <Content Include="Content\LoginStyle.css" />
+    <Content Include="Content\Toast.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -371,6 +367,7 @@
     <Content Include="Scripts\External\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\External\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\External\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Toast.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

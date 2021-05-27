@@ -7,6 +7,34 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="~/Content/LoginStyle.css" type="text/css" />
+    <script>
+        let buttonLock = false;
+
+        function signIn() {
+            if (!buttonLock) {
+                var inputs = document.getElementById("login_form").elements;
+                $.ajax({
+                    url: '@Url.Action("SignIn", "Home")?login=' + inputs[0].value + '&pass=' + inputs[1].value,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        var result = data.success * 1;
+                        if (result) {
+                            showToast("Zalogowano");
+                        } else {
+                            showToast("Nieprawidłowy login lub hasło");
+                        }
+                    },
+                    error: function (ex) {
+                        alert("dupa");
+                    },
+                    complete: function () {
+                        buttonLock = false;
+                    }
+                });
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="banner">
@@ -14,16 +42,19 @@
     </div>
     <div class="wrapper">
         <div class="form">
-            <form>
+            <form id="login_form">
                 <p class="frame_label">Login</p>
                 <input type="text" /><br><br>
                 <p class="frame_label">Hasło</p>
                 <input type="password" /><br><br>
-                <div class="submit"><span>Zaloguj się</span></div>
+                <div class="submit" onclick="signIn()"><span>Zaloguj się</span></div>
                 <input type="submit" style="visibility: hidden; position: absolute;" />
             </form>
-        </div><br>
-        <span class="new_account" onclick="location.href = '@Url.Action("Register", "Home")'">Nie masz konta?</span>
+        </div><br><br>
+        <div class="additional_option" onclick="location.href = '@Url.Action("Register", "Home")'">
+            Nie masz konta?<br>
+            Zarejestruj się
+        </div>
     </div>
 </body>
 </html>

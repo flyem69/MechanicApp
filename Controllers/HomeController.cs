@@ -1,15 +1,14 @@
-﻿using FirebaseAdmin;
-using Google.Apis.Auth.OAuth2;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MechanicApp.Models;
 using System.Data.Entity;
+
 namespace MechanicApp.Controllers {
     public class HomeController : Controller {
-        private DatabaseContext jobsDB = new DatabaseContext();
+        private DatabaseContext DBContext = new DatabaseContext();
         public ActionResult Index() {
             if (Session["LoggedIn"] != null) {
                 return View("~/Views/Home/Login.cshtml");
@@ -20,6 +19,37 @@ namespace MechanicApp.Controllers {
 
         public ActionResult Register() {
             return View();
+        }
+
+        public JsonResult SignIn(string login, string pass) {
+            var user = new User();
+            user.Name = login;
+            user.Password = pass;
+            try {
+                DBContext.Users.Single(u => u.Name.Equals(user.Name) && u.HashedPassword.Equals(user.HashedPassword));
+                return Json(new { success = 1 });
+            } catch (Exception) {
+                return Json(new { success = 0 });
+            }
+        }
+
+        public JsonResult SignUp(string login, string pass) {
+            try {
+                DBContext.Users.Single(u => u.Name.Equals(login));
+                return Json(new { result = "exists" });
+            } catch (Exception) {
+                if (
+                    login.Length == 0 || login.Length > 32 ||
+                    pass.Length < 8 || pass.Length > 32) {
+                    return Json(new { result = "size" });
+                }
+                User user = new User();
+                user.Name = login;
+                user.Password = pass;
+                DBContext.Users.Add(user);
+                DBContext.SaveChanges();
+                return Json(new { result = "ok" });
+            }
         }
         /*
          *  SHA512 hasher = new SHA512Managed();
@@ -43,7 +73,7 @@ namespace MechanicApp.Controllers {
             job.Defects = defects;
             jobsDB.Jobs.Add(job);
             jobsDB.SaveChanges();*/
-            Job tmpjob = jobsDB.Jobs.Include(j => j.Defects).SingleOrDefault(j => j.Id == id);
+            Job tmpjob = DBContext.Jobs.Include(j => j.Defects).SingleOrDefault(j => j.Id == id);
             return View(tmpjob);
         }
 
