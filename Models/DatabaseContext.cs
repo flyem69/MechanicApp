@@ -15,7 +15,7 @@ namespace MechanicApp.Models
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Job> Jobs { get; set; }
+        //public DbSet<Job> Jobs { get; set; }
     }
 
     public class DatabaseInitializer : DropCreateDatabaseIfModelChanges<DatabaseContext>
@@ -26,7 +26,8 @@ namespace MechanicApp.Models
             User user = new User();
             user.Name = "pansamochod";
             user.Password = "123456";
-            context.Users.Add(user);
+
+            List<Job> jobs = new List<Job>();
 
             Job job = new Models.Job();
             job.CarManufacturer = "Honda";
@@ -39,7 +40,24 @@ namespace MechanicApp.Models
             defects.Add(new Defect("Skrzynie też"));
             defects.Add(new Defect("A zawieszenia to nigdy nie było"));
             job.Defects = defects;
-            context.Jobs.Add(job);
+
+            jobs.Add(job);
+            user.Jobs = jobs;
+
+            context.Users.Add(user);
+
+            /*Job job = new Models.Job();
+            job.CarManufacturer = "Honda";
+            job.CarModel = "Jazz";
+            job.ClientName = "Jagzam Nicram";
+            job.ClientPhoneNumber = "111222333";
+
+            List<Defect> defects = new List<Defect>();
+            defects.Add(new Defect("Silnik wyjebało"));
+            defects.Add(new Defect("Skrzynie też"));
+            defects.Add(new Defect("A zawieszenia to nigdy nie było"));
+            job.Defects = defects;
+            context.Jobs.Add(job);*/
             
         }
     }

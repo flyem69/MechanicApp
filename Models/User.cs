@@ -22,5 +22,6 @@ namespace MechanicApp.Models
                 byte[] res = hasher.ComputeHash(pass);
                 HashedPassword = Convert.ToBase64String(res);
             } }
+        public List<Job> Jobs { get; set; }
     }
 }

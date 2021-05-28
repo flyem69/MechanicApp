@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using MechanicApp.Models;
 using System.Data.Entity;
-
 namespace MechanicApp.Controllers {
     public class HomeController : Controller {
         private DatabaseContext DBContext = new DatabaseContext();
@@ -73,8 +72,21 @@ namespace MechanicApp.Controllers {
             job.Defects = defects;
             jobsDB.Jobs.Add(job);
             jobsDB.SaveChanges();*/
-            Job tmpjob = DBContext.Jobs.Include(j => j.Defects).SingleOrDefault(j => j.Id == id);
-            return View(tmpjob);
+            User data = DBContext.Users.Include(u => u.Jobs.Select(j => j.Defects)).SingleOrDefault(u => u.Id == 1);
+            
+            if(data != null)
+            {
+                foreach (Job job in data.Jobs)
+                {
+                    if (job.Id == id)
+                    {
+                        return View(job);
+                    }
+                }
+            }
+
+            //Job tmpjob = DBContext.Users.;//.Jobs.Include(j => j.Defects).SingleOrDefault(j => j.Id == id);
+            return View("Index");
         }
 
         /*public ActionResult About() {
