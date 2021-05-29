@@ -42,10 +42,44 @@ namespace MechanicApp.Models
             job.Defects = defects;
 
             jobs.Add(job);
+
+            job = new Models.Job();
+            job.CarManufacturer = "Opel";
+            job.CarModel = "Astra GTC";
+            job.ClientName = "Piotr Fronczewski";
+            job.ClientPhoneNumber = "997213769";
+
+            defects = new List<Defect>();
+            defects.Add(new Defect("Hamulce do naprawy"));
+            defects.Add(new Defect("Kot nasikal do wentylacji"));
+            job.Defects = defects;
+
+            jobs.Add(job);
             user.Jobs = jobs;
 
             context.Users.Add(user);
 
+/*            user = new User();
+            user.Name = "samochodzik";
+            user.Password = "12345";
+
+            jobs = new List<Job>();
+
+            job = new Models.Job();
+            job.CarManufacturer = "Audi";
+            job.CarModel = "A3";
+            job.ClientName = "Marcin Musial";
+            job.ClientPhoneNumber = "123456789";
+
+            defects = new List<Defect>();
+            defects.Add(new Defect("Zawieszenie kaput"));
+            defects.Add(new Defect("Maslo orzechowe"));
+            job.Defects = defects;
+
+            jobs.Add(job);
+            user.Jobs = jobs;
+
+            context.Users.Add(user);*/
             /*Job job = new Models.Job();
             job.CarManufacturer = "Honda";
             job.CarModel = "Jazz";
@@ -58,7 +92,7 @@ namespace MechanicApp.Models
             defects.Add(new Defect("A zawieszenia to nigdy nie było"));
             job.Defects = defects;
             context.Jobs.Add(job);*/
-            
+
         }
     }
 }
