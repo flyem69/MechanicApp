@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -324,11 +324,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -343,19 +338,58 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\External\bootstrap-theme.css" />
-    <Content Include="Content\External\bootstrap-theme.min.css" />
+    <Content Include="Content\External\bootstrap-grid.css" />
+    <Content Include="Content\External\bootstrap-grid.min.css" />
+    <Content Include="Content\External\bootstrap-grid.rtl.css" />
+    <Content Include="Content\External\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\External\bootstrap-reboot.css" />
+    <Content Include="Content\External\bootstrap-reboot.min.css" />
+    <Content Include="Content\External\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\External\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\External\bootstrap-utilities.css" />
+    <Content Include="Content\External\bootstrap-utilities.min.css" />
+    <Content Include="Content\External\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\External\bootstrap-utilities.rtl.min.css" />
     <Content Include="Content\External\bootstrap.css" />
     <Content Include="Content\External\bootstrap.min.css" />
+    <Content Include="Content\External\bootstrap.rtl.css" />
+    <Content Include="Content\External\bootstrap.rtl.min.css" />
+    <Content Include="Content\External\bootstrap-theme.css" />
+    <Content Include="Content\External\bootstrap-theme.min.css" />
     <Content Include="Content\Job.css" />
     <Content Include="Content\LoginStyle.css" />
     <Content Include="Content\Toast.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\External\bootstrap.bundle.js" />
+    <Content Include="Scripts\External\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\External\bootstrap.esm.js" />
+    <Content Include="Scripts\External\bootstrap.esm.min.js" />
     <Content Include="Scripts\External\bootstrap.js" />
     <Content Include="Scripts\External\bootstrap.min.js" />
+    <Content Include="Content\External\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\External\bootstrap.rtl.css.map" />
+    <Content Include="Content\External\bootstrap.min.css.map" />
+    <Content Include="Content\External\bootstrap.css.map" />
+    <Content Include="Content\External\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\External\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\External\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\External\bootstrap-utilities.css.map" />
+    <Content Include="Content\External\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\External\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\External\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\External\bootstrap-reboot.css.map" />
+    <Content Include="Content\External\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\External\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\External\bootstrap-grid.min.css.map" />
+    <Content Include="Content\External\bootstrap-grid.css.map" />
+    <Content Include="Scripts\External\bootstrap.min.js.map" />
+    <Content Include="Scripts\External\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\External\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\External\bootstrap.esm.js.map" />
+    <Content Include="Scripts\External\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\External\bootstrap.js.map" />
     <None Include="Scripts\External\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\External\jquery-3.4.1.js" />
     <Content Include="Scripts\External\jquery-3.4.1.min.js" />
@@ -385,17 +419,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Job.cshtml" />
+    <Content Include="Views\Home\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\External\bootstrap.min.css.map" />
-    <Content Include="Content\External\bootstrap.css.map" />
     <Content Include="Content\External\bootstrap-theme.min.css.map" />
     <Content Include="Content\External\bootstrap-theme.css.map" />
     <None Include="packages.config" />
@@ -434,7 +463,7 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

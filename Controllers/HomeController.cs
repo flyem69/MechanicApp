@@ -100,5 +100,18 @@ namespace MechanicApp.Controllers {
 
             return View();
         }*/
+
+        public ActionResult List(int id)
+        {
+
+            User data = DBContext.Users.Where(u => u.Id == id).Include(u => u.Jobs).FirstOrDefault();
+
+            if (data != null)
+            {
+              return View(data);
+            }
+
+            return View("Index");
+        }
     }
 }

@@ -1,0 +1,44 @@
+﻿@model MechanicApp.Models.User
+
+@{
+    ViewBag.title = "";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/Job.css" type="text/css" />
+    <title></title>
+</head>
+<body>
+    <table class="table table-bordered bg-white">
+        <thead class="bg-dark text-white">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Car manfuacturer</th>
+                <th scope="col">Car model</th>
+                <th scope="col">Client name</th>
+                <th scope="col">Phone number</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="align-middle">
+            @foreach (var job in Model.Jobs)
+            {
+                <tr>
+                    <td>@job.Id</td>
+                    <td>@job.CarManufacturer</td>
+                    <td>@job.CarModel</td>
+                    <td>@job.ClientName</td>
+                    <td>@job.ClientPhoneNumber</td>
+                    <td><a class="btn btn-default" href="~/Home/Job/@job.Id">Show</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+
+
