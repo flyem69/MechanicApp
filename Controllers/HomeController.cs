@@ -5,19 +5,24 @@ using System.Web;
 using System.Web.Mvc;
 using MechanicApp.Models;
 using System.Data.Entity;
+
 namespace MechanicApp.Controllers {
     public class HomeController : Controller {
         private DatabaseContext DBContext = new DatabaseContext();
-        public ActionResult Index() {
-            if (Session["LoggedIn"] != null) {
-                return View("~/Views/Home/Login.cshtml");
+        public ActionResult Login() {
+            if (Session["UserId"] != null) {
+                return RedirectToAction("List", "Home");
             } else {
-                return View("~/Views/Home/Login.cshtml");
+                return View();
             }
         }
 
         public ActionResult Register() {
-            return View();
+            if (Session["UserId"] != null) {
+                return RedirectToAction("List", "Home");
+            } else {
+                return View();
+            }
         }
 
         public JsonResult SignIn(string login, string pass) {
@@ -25,7 +30,8 @@ namespace MechanicApp.Controllers {
             user.Name = login;
             user.Password = pass;
             try {
-                DBContext.Users.Single(u => u.Name.Equals(user.Name) && u.HashedPassword.Equals(user.HashedPassword));
+                User signedInUser = DBContext.Users.Single(u => u.Name.Equals(user.Name) && u.HashedPassword.Equals(user.HashedPassword));
+                Session["UserId"] = signedInUser.Id;
                 return Json(new { success = 1 });
             } catch (Exception) {
                 return Json(new { success = 0 });
@@ -47,6 +53,7 @@ namespace MechanicApp.Controllers {
                 user.Password = pass;
                 DBContext.Users.Add(user);
                 DBContext.SaveChanges();
+                Session["UserId"] = user.Id;
                 return Json(new { result = "ok" });
             }
         }
@@ -89,29 +96,21 @@ namespace MechanicApp.Controllers {
             return View("Index");
         }
 
-        /*public ActionResult About() {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact() {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }*/
-
-        public ActionResult List(int id)
+        public ActionResult List()
         {
+            if (Session["UserId"] == null) {
+                return RedirectToAction("Login", "Home");
+            } else {
+                int id = Convert.ToInt32(Session["UserId"]);
+                User data = DBContext.Users.Where(u => u.Id == id).Include(u => u.Jobs).FirstOrDefault();
 
-            User data = DBContext.Users.Where(u => u.Id == id).Include(u => u.Jobs).FirstOrDefault();
+                if (data != null) {
+                    return View(data);
+                }
 
-            if (data != null)
-            {
-              return View(data);
+                Session.Abandon();
+                return RedirectToAction("Login", "Home");
             }
-
-            return View("Index");
         }
     }
 }

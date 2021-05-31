@@ -12,6 +12,8 @@
 
         function signIn() {
             if (!buttonLock) {
+                buttonLock = true;
+                setLoaderVisivility(true);
                 var inputs = document.getElementById("login_form").elements;
                 $.ajax({
                     url: '@Url.Action("SignIn", "Home")?login=' + inputs[0].value + '&pass=' + inputs[1].value,
@@ -20,15 +22,16 @@
                     success: function (data) {
                         var result = data.success * 1;
                         if (result) {
-                            showToast("Zalogowano");
+                            window.location.reload(true);
                         } else {
                             showToast("Nieprawidłowy login lub hasło");
                         }
                     },
                     error: function (ex) {
-                        alert("dupa");
+                        showToast("error");
                     },
                     complete: function () {
+                        setLoaderVisivility(false);
                         buttonLock = false;
                     }
                 });
@@ -42,7 +45,7 @@
     </div>
     <div class="wrapper">
         <div class="form">
-            <form id="login_form">
+            <form id="login_form" method="post" action="javascript:void(0);" onsubmit="signIn()">
                 <p class="frame_label">Login</p>
                 <input type="text" /><br><br>
                 <p class="frame_label">Hasło</p>

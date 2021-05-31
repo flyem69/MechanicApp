@@ -33,6 +33,7 @@
             if (samePass) {
                 if (!buttonLock) {
                     buttonLock = true;
+                    setLoaderVisivility(true);
                     var inputs = document.getElementById("register_form").elements;
                     $.ajax({
                         url: '@Url.Action("SignUp", "Home")?login=' + inputs[0].value + '&pass=' + inputs[1].value,
@@ -41,7 +42,7 @@
                         success: function (data) {
                             var result = data.result;
                             if (result == "ok") {
-                                showToast("Dodano użytkownika do bazy");
+                                window.location.reload(true);
                             } else if (result == "exists") {
                                 showToast("Nazwa użytkownika już istnieje");
                             } else if (result == "size") {
@@ -49,9 +50,10 @@
                             }
                         },
                         error: function (ex) {
-                            alert("dupa");
+                            showToast("error");
                         },
                         complete: function () {
+                            setLoaderVisivility(false);
                             buttonLock = false;
                         }
                     });
@@ -68,7 +70,7 @@
     </div>
     <div class="wrapper">
         <div class="form">
-            <form id="register_form">
+            <form id="register_form" method="post" action="javascript:void(0);" onsubmit="signUp()">
                 <p class="frame_label">Login</p>
                 <input type="text" /><br><br>
                 <p class="frame_label">Hasło</p>
@@ -79,7 +81,7 @@
                 <input type="submit" style="visibility: hidden; position: absolute;" />
             </form>
         </div><br><br>
-        <div class="additional_option" onclick="location.href = '@Url.Action("Index", "Home")'">
+        <div class="additional_option" onclick="location.href = '@Url.Action("Login", "Home")'">
             Masz już konto?<br>
             Zaloguj się
         </div>
