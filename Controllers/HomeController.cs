@@ -112,5 +112,9 @@ namespace MechanicApp.Controllers {
                 return RedirectToAction("Login", "Home");
             }
         }
+
+        public ActionResult ManageJob(Job job) {
+            return View(job);
+        }
     }
 }

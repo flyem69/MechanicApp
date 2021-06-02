@@ -30,7 +30,7 @@ div.form {
 
 input:not([type='submit']) {
     width: 200px;
-    border: 2px solid #ccc;
+    border: 2px solid lightgray;
     border-radius: 4px;
     -webkit-transition: 0.5s;
     transition: 0.5s;
@@ -38,7 +38,7 @@ input:not([type='submit']) {
 }
 
 input:not([type='submit']):focus {
-    border: 2px solid #fcb045;
+    border: 2px solid orange;
 }
 
 #pass2 {

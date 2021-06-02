@@ -1,0 +1,63 @@
+﻿@model MechanicApp.Models.Job
+
+@{
+    bool edit = !string.IsNullOrWhiteSpace(Model.CarManufacturer);
+    ViewBag.title = edit ? "Edytuj zlecenie" : "Dodaj zlecenie";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/ManageJob.css" type="text/css" />
+    <script>
+        let 
+        function addRow() {
+            let table = document.getElementById("defects_table");
+            let row = table.insertRow(table.rows.length);
+            let column = row.insertCell(0);
+            column.innerHTML = "<input type=\"text\" class=\"defect\" /><div class=\"delete_defect\" onclick=\"deleteRow(this)\"><div class=\"delete_defect_text\"><span>X</span></div></div>";
+        }
+        function deleteRow(row) {
+            let parentNode = row.parentNode.parentNode;
+            let indexToDelete = parentNode.rowIndex;
+            document.getElementById("defects_table").deleteRow(indexToDelete);
+        }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="job">
+            <div class="job_element">
+                <p class="label">Marka samochodu</p>
+                <input type="text" id="manufacturer" />
+            </div>
+            <div class="job_element">
+                <p class="label">Model samochodu</p>
+                <input type="text" id="model" />
+            </div><br><br>
+            <div class="job_element">
+                <p class="label">Nazwa klienta</p>
+                <input type="text" id="client" />
+            </div>
+            <div class="job_element">
+                <p class="label">Numer kontaktowy</p>
+                <input type="tel" id="phone" />
+            </div><br><br>
+            <div class="job_element" id="defects">
+                <p class="label">Defekty</p>
+                <table id="defects_table">
+                    <tr>
+                        <td>
+                            <input type="text" class="defect" />
+                            <div class="delete_defect" onclick="deleteRow(this)"><div class="delete_defect_text"><span>X</span></div></div>
+                        </td>
+                    </tr>
+                </table>
+            </div><br>
+            <div id="add_defect" onclick="addRow()"><span>Dodaj defekt</span></div>
+        </div>
+    </div>
+</body>
+</html>

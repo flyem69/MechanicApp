@@ -1,0 +1,92 @@
+﻿.wrapper {
+    text-align: center;
+}
+
+#job {
+    display: inline-block;
+    vertical-align: top;
+    padding: 16px;
+    background-color: dimgray;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.job_element {
+    display: inline-block;
+}
+
+#defects {
+    width: 100%;
+}
+
+.defect {
+    width: 88%;
+    float: left;
+    margin-bottom: 5px;
+}
+
+.label {
+    font-weight: bold;
+    color: white;
+    margin: 0px;
+    font-size: 15px;
+}
+
+input {
+    border: 2px solid lightgray;
+    border-radius: 4px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input:focus {
+    border: 2px solid orange;
+}
+
+.delete_defect {
+    display: inline-block;
+    float: right;
+    vertical-align: middle;
+    margin-left: 11px;
+    border-radius: 100%;
+    background-color: orange;
+    -webkit-transition: 0.2s;
+    cursor: pointer;
+}
+
+.delete_defect:hover {
+    background-color: red;
+}
+
+.delete_defect_text {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+.delete_defect_text span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#defects_table {
+    width: 100%;
+}
+
+#add_defect {
+    display: inline-block;
+    border-start-start-radius: 5px;
+    border-start-end-radius: 5px;
+    border-end-end-radius: 50%;
+    border-end-start-radius: 50%;
+    background-color: orange;
+    -webkit-transition: 0.2s;
+    cursor: pointer;
+    padding: 0 20px;
+    padding-bottom: 5px;
+}
+
+#add_defect:hover {
+    background-color: lawngreen;
+}

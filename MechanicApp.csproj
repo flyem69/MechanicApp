@@ -358,7 +358,8 @@
     <Content Include="Content\External\bootstrap-theme.min.css" />
     <Content Include="Content\Job.css" />
     <Content Include="Content\Loader.css" />
-    <Content Include="Content\LoginStyle.css" />
+    <Content Include="Content\Login.css" />
+    <Content Include="Content\ManageJob.css" />
     <Content Include="Content\Toast.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -419,6 +420,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Job.cshtml" />
     <Content Include="Views\Home\List.cshtml" />
+    <Content Include="Views\Home\ManageJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
