@@ -79,18 +79,27 @@ namespace MechanicApp.Controllers {
             job.Defects = defects;
             jobsDB.Jobs.Add(job);
             jobsDB.SaveChanges();*/
-            User data = DBContext.Users.Include(u => u.Jobs.Select(j => j.Defects)).SingleOrDefault(u => u.Id == 1);
-            
-            if(data != null)
+            if(Session["UserId"] == null)
             {
-                foreach (Job job in data.Jobs)
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                int userID = Convert.ToInt32(Session["UserID"]);
+                User data = DBContext.Users.Include(u => u.Jobs.Select(j => j.Defects)).SingleOrDefault(u => u.Id == userID);
+
+                if (data != null)
                 {
-                    if (job.Id == id)
+                    foreach (Job job in data.Jobs)
                     {
-                        return View(job);
+                        if (job.Id == id)
+                        {
+                            return View(job);
+                        }
                     }
                 }
             }
+            
 
             //Job tmpjob = DBContext.Users.;//.Jobs.Include(j => j.Defects).SingleOrDefault(j => j.Id == id);
             return View("Index");
