@@ -119,13 +119,35 @@ namespace MechanicApp.Controllers {
             }
         }
 
-        public ActionResult ManageJob(Job job) {
-            return View(job);
+        public ActionResult ManageJob(int? jobId) {
+            if (Session["UserId"] == null) {
+                return RedirectToAction("Login", "Home");
+            } else {
+                if (jobId.HasValue) {
+                    try {
+                        int userId = Convert.ToInt32(Session["UserId"]);
+                        User user = DBContext.Users
+                            .Include(u => u.Jobs.Select(j => j.Defects))
+                            .Single(u => u.Id == userId);
+                        foreach (Job job in user.Jobs) {
+                            if (job.Id == jobId.Value) {
+                                return View(job);
+                            }
+                        }
+                        return RedirectToAction("List", "Home");
+                    } catch (Exception) {
+                        return RedirectToAction("List", "Home");
+                    }
+                } else {
+                    return View();
+                }
+            }
         }
 
         [HttpPost]
         public ActionResult AddJob(string jobString) {
             try {
+                int userId = Convert.ToInt32(Session["UserId"]);
                 JObject jobJSON = JObject.Parse(jobString);
                 Job job = new Job();
                 job.CarManufacturer = (string)jobJSON["CarManufacturer"];
@@ -135,7 +157,9 @@ namespace MechanicApp.Controllers {
                 JArray defectsJSON = (JArray)jobJSON["Defects"];
                 List<Defect> defects = defectsJSON.Select(d => new Defect((string)d)).ToList();
                 job.Defects = defects;
-                User user = DBContext.Users.Include(u => u.Jobs.Select(j => j.Defects)).Single(u => u.Id == 1);
+                User user = DBContext.Users
+                    .Include(u => u.Jobs.Select(j => j.Defects))
+                    .Single(u => u.Id == userId);
                 user.Jobs.Add(job);
                 DBContext.SaveChanges();
                 return Json(new { success = 1 });
@@ -145,33 +169,40 @@ namespace MechanicApp.Controllers {
         }
 
         [HttpPost]
-        public ActionResult EditJob(Job model) {
-            if (model == null) {
-                return Json(new { success = 0 });
-            } else {
-                try {
-                    int id = Convert.ToInt32(Session["UserId"]);
-                    User user = DBContext.Users.Include(u => u.Jobs.Select(j => j.Defects)).Single(u => u.Id == 1);
-                    bool editSuccess = false;
-                    for (int i = 0; i < user.Jobs.Count; i++) {
-                        if (user.Jobs[i].Id == model.Id) {
-                            /*user.Jobs[i].CarManufacturer = job.CarManufacturer;
-                            user.Jobs[i].CarModel = job.CarModel;
-                            user.Jobs[i].ClientName = job.ClientName;
-                            user.Jobs[i].ClientPhoneNumber = job.ClientPhoneNumber;
-                            user.Jobs[i].*/
-                            user.Jobs[i] = model;
-                            DBContext.SaveChanges();
-                            editSuccess = true;
+        public ActionResult EditJob(string jobString) {
+            try {
+                int userId = Convert.ToInt32(Session["UserId"]);
+                JObject jobJSON = JObject.Parse(jobString);
+                int jobId = (int)jobJSON["Id"];
+                string newCarManufacturer = (string)jobJSON["CarManufacturer"];
+                string newCarModel = (string)jobJSON["CarModel"];
+                string newClientName = (string)jobJSON["ClientName"];
+                string newClientPhoneNumber = (string)jobJSON["ClientPhoneNumber"];
+                JArray defectsJSON = (JArray)jobJSON["Defects"];
+                List<Defect> newDefects = defectsJSON.Select(d => new Defect((string)d)).ToList();
+                User user = DBContext.Users
+                    .Include(u => u.Jobs.Select(j => j.Defects))
+                    .Single(u => u.Id == userId);
+                foreach (Job job in user.Jobs) {
+                    if (job.Id == jobId) {
+                        job.CarManufacturer = newCarManufacturer;
+                        job.CarModel = newCarModel;
+                        job.ClientName = newClientName;
+                        job.ClientPhoneNumber = newClientPhoneNumber;
+                        job.Defects.ToList().ForEach(d => DBContext.Entry(d).State = EntityState.Deleted);
+                        /*for (int i = 0; i < job.Defects.Count; i++) {
+                            DBContext.Entry(job.Defects.ElementAt(0)).State = EntityState.Deleted;
+                        }*/
+                        foreach (Defect newDefect in newDefects) {
+                            job.Defects.Add(newDefect);
                         }
-                    }
-                    if (editSuccess)
+                        DBContext.SaveChanges();
                         return Json(new { success = 1 });
-                    else
-                        return Json(new { success = 0 });
-                } catch (Exception) {
-                    return Json(new { success = 0 });
+                    }
                 }
+                return Json(new { success = 0 });
+            } catch (Exception) {
+                return Json(new { success = 0 });
             }
         }
     }

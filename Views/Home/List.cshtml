@@ -25,8 +25,7 @@
             </tr>
         </thead>
         <tbody class="align-middle">
-            @foreach (var job in Model.Jobs)
-            {
+            @foreach (var job in Model.Jobs) {
                 <tr>
                     <td>@job.Id</td>
                     <td>@job.CarManufacturer</td>
@@ -38,6 +37,8 @@
             }
         </tbody>
     </table>
+    <div onclick="window.location.href = '@Url.Action("ManageJob", "Home", new { jobId = 3 } )'">Test edit</div>
+    <div onclick="window.location.href = '@Url.Action("ManageJob", "Home")'">Test add</div>
 </body>
 </html>
 

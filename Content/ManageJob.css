@@ -90,3 +90,22 @@ input:focus {
 #add_defect:hover {
     background-color: lawngreen;
 }
+
+.submit {
+    display: inline-block;
+    background-color: orange;
+    cursor: pointer;
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px;
+}
+
+.submit span {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.submit:hover span {
+    color: white;
+}
