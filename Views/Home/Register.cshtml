@@ -36,7 +36,8 @@
                     setLoaderVisivility(true);
                     var inputs = document.getElementById("register_form").elements;
                     $.ajax({
-                        url: '@Url.Action("SignUp", "Home")?login=' + inputs[0].value + '&pass=' + inputs[1].value,
+                        url: '@Url.Action("SignUp", "Home")',
+                        data: { login: inputs[0].value, pass: inputs[1].value },
                         type: 'POST',
                         dataType: 'json',
                         success: function (data) {

@@ -16,7 +16,8 @@
                 setLoaderVisivility(true);
                 var inputs = document.getElementById("login_form").elements;
                 $.ajax({
-                    url: '@Url.Action("SignIn", "Home")?login=' + inputs[0].value + '&pass=' + inputs[1].value,
+                    url: '@Url.Action("SignIn", "Home")',
+                    data: { login: inputs[0].value, pass: inputs[1].value },
                     type: 'POST',
                     dataType: 'json',
                     success: function (data) {

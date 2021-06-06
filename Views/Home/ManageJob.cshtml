@@ -12,7 +12,6 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="~/Content/ManageJob.css" type="text/css" />
     <script>
-        let 
         function addRow() {
             let table = document.getElementById("defects_table");
             let row = table.insertRow(table.rows.length);
@@ -23,6 +22,41 @@
             let parentNode = row.parentNode.parentNode;
             let indexToDelete = parentNode.rowIndex;
             document.getElementById("defects_table").deleteRow(indexToDelete);
+        }
+        function editJob() {
+
+        }
+        function addJob() {
+            let defectsHTML = document.getElementsByClassName("defect");
+            let defects = [];
+            for (let i = 0; i < defectsHTML.length; i++) {
+                defects.push(defectsHTML[i].value);
+            }
+            let job = {
+                "CarManufacturer": document.getElementById("manufacturer").value,
+                "CarModel": document.getElementById("model").value,
+                "ClientName": document.getElementById("client").value,
+                "ClientPhoneNumber": document.getElementById("phone").value,
+                "Defects": defects
+            };
+            alert(JSON.stringify(job));
+            $.ajax({
+                url: '@Url.Action("AddJob", "Home")',
+                data: { jobString: JSON.stringify(job) },
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    let result = data.success;
+                    alert(result);
+                },
+                error: function (ex) {
+                    showToast("error");
+                },
+                complete: function () {
+                    //setLoaderVisivility(false);
+                    //buttonLock = false;
+                }
+            });
         }
     </script>
 </head>
@@ -58,6 +92,7 @@
             </div><br>
             <div id="add_defect" onclick="addRow()"><span>Dodaj defekt</span></div>
         </div>
+        <div onclick="addJob()">Dodaj</div>
     </div>
 </body>
 </html>
