@@ -62,6 +62,16 @@ namespace MechanicApp.Controllers {
                 return Json(new { result = "ok" });
             }
         }
+
+        [HttpPost]
+        public JsonResult SignOut() {
+            try {
+                Session.Abandon();
+                return Json(new { success = 1 });
+            } catch (Exception) {
+                return Json(new { success = 0 });
+            }
+        }
         /*
          *  SHA512 hasher = new SHA512Managed();
             byte[] pass = Encoding.Unicode.GetBytes("123452");

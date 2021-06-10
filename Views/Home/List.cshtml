@@ -9,10 +9,33 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="~/Content/Job.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/List.css" type="text/css" />
     <title></title>
+    <script>
+        function signOut() {
+            $.ajax({
+                url: '@Url.Action("SignOut", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    var result = data.success * 1;
+                    if (result) {
+                        window.location.reload(true);
+                    } else {
+                        showToast("Nie udało się wylogować");
+                    }
+                },
+                error: function (ex) {
+                    showToast("error");
+                }
+            });
+        }
+    </script>
 </head>
 <body>
+    <div id="banner">
+        <div id="sign_out" onclick="signOut()"><h5>Wyloguj się</h5></div>
+    </div>
     <table class="table table-bordered bg-white">
         <thead class="bg-dark text-white">
             <tr>

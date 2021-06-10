@@ -359,6 +359,7 @@
     <Content Include="Content\External\bootstrap-theme.css" />
     <Content Include="Content\External\bootstrap-theme.min.css" />
     <Content Include="Content\Job.css" />
+    <Content Include="Content\List.css" />
     <Content Include="Content\Loader.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\ManageJob.css" />

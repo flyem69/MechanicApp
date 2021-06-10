@@ -1,4 +1,14 @@
-﻿.wrapper {
+﻿#banner {
+    text-align: center;
+    padding: 60px 0;
+}
+
+#banner_title {
+    font-size: 40px;
+    color: orange;
+}
+
+.wrapper {
     text-align: center;
 }
 

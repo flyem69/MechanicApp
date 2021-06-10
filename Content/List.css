@@ -1,0 +1,15 @@
+﻿#banner {
+    text-align: right;
+    padding: 20px 0;
+}
+
+#sign_out {
+    display: inline-block;
+    color: white;
+    transition: all 0.35s;
+    cursor: pointer;
+}
+
+#sign_out:hover {
+    color: orange;
+}

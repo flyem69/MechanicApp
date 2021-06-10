@@ -86,6 +86,15 @@
 </head>
 <body>
     <div class="wrapper">
+        <div id="banner">
+            @{
+                if (edit) {
+                    <p id="banner_title">Edytuj zlecenie</p>
+                } else {
+                    <p id="banner_title">Dodaj zlecenie</p>
+                }
+            }
+        </div>
         <div id="job">
             <div class="job_element">
                 <p class="label">Marka samochodu</p>
