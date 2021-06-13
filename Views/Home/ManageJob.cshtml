@@ -51,11 +51,24 @@
                     "Defects": defects
                 };
                 let link;
-                if (jobId != null) {
+                let resultHandler;
+
+                @{ 
+                    int myId = 0;
+                    if(edit)
+                    {
+                        myId = Model.Id;
+                    }
+                }
+
+                if (jobId == null) {
+                    link = '@Url.Action("AddJob", "Home")';
+                    resultHandler = '@Url.Action("List", "Home")';
+                } else {
                     job["Id"] = jobId;
                     link = '@Url.Action("EditJob", "Home")';
-                } else {
-                    link = '@Url.Action("AddJob", "Home")';
+                    resultHandler = '@Url.Action("Job", "Home", new { id = myId })';
+
                 }
                 alert(defects);
                 alert(link);
@@ -67,7 +80,7 @@
                     success: function (data) {
                         let result = data.success * 1;
                         if (result) {
-                            window.location.href = '@Url.Action("List", "Home")';
+                            window.location.href = resultHandler;
                         } else {
                             showToast("Błąd wprowadzania danych");
                         }

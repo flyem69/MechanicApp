@@ -21,3 +21,21 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.circle {
+    border-radius: 50%;
+    background: yellow;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    border: 3px solid #000;
+}
+
+.job_button {
+    display: inline-block;
+    background-color: orange;
+    cursor: pointer;
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px;
+    color: black;
+}

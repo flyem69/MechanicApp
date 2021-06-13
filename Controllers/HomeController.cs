@@ -155,6 +155,40 @@ namespace MechanicApp.Controllers {
         }
 
         [HttpPost]
+        public ActionResult ToggleDefect(int jobId, int defectId)
+        {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                int id = Convert.ToInt32(Session["UserId"]);
+                User data = DBContext.Users.Include(u => u.Jobs.Select(j => j.Defects)).SingleOrDefault(u => u.Id == id);
+
+                if (data != null)
+                {
+                    foreach(Job j in data.Jobs)
+                    {
+                        if(j.Id == jobId)
+                        {
+                            foreach(Defect d in j.Defects)
+                            {
+                                if(d.Id == defectId)
+                                {
+                                    d.IsFinished = !d.IsFinished;
+                                    DBContext.SaveChanges();
+                                    return Json(new { result = 1, currentState = d.IsFinished ? 1 : 0 });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return Json(new { result = 0, currentState = 0 });
+        }
+
+        [HttpPost]
         public ActionResult AddJob(string jobString) {
             try {
                 int userId = Convert.ToInt32(Session["UserId"]);
