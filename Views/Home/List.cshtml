@@ -36,6 +36,7 @@
     <div id="banner">
         <div id="sign_out" onclick="signOut()"><h5>Wyloguj się</h5></div>
     </div>
+    <a class="btn btn-default text-white border" href='@Url.Action("ManageJob", "Home")'>Add</a>
     <table class="table table-bordered bg-white">
         <thead class="bg-dark text-white">
             <tr>
@@ -45,10 +46,12 @@
                 <th scope="col">Imie klienta</th>
                 <th scope="col">Numer telefonu</th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody class="align-middle">
-            @foreach (var job in Model.Jobs) {
+            @foreach (var job in Model.Jobs)
+            {
                 <tr>
                     <td>@job.Id</td>
                     <td>@job.CarManufacturer</td>
@@ -56,12 +59,11 @@
                     <td>@job.ClientName</td>
                     <td>@job.ClientPhoneNumber</td>
                     <td><a class="btn btn-default" href="~/Home/Job/@job.Id">Show</a></td>
+                    <td><a class="btn btn-default" href='@Url.Action("ManageJob", "Home", new { jobId = job.Id } )'>Edit</a></td>
                 </tr>
             }
         </tbody>
     </table>
-    <div onclick="window.location.href = '@Url.Action("ManageJob", "Home", new { jobId = 3 } )'">Test edit</div>
-    <div onclick="window.location.href = '@Url.Action("ManageJob", "Home")'">Test add</div>
 </body>
 </html>
 
