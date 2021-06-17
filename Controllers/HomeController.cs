@@ -189,6 +189,32 @@ namespace MechanicApp.Controllers {
         }
 
         [HttpPost]
+        public ActionResult RemoveJob(int jobId)
+        {
+            try
+            {
+                int userId = Convert.ToInt32(Session["UserId"]);
+                User user = DBContext.Users
+                    .Include(u => u.Jobs.Select(j => j.Defects))
+                    .Single(u => u.Id == userId);
+                foreach (Job job in user.Jobs)
+                {
+                    if (job.Id == jobId)
+                    {
+                        user.Jobs.Remove(job);
+                        DBContext.SaveChanges();
+                        return Json(new { success = 1 });
+                    }
+                }
+                return Json(new { success = 0 });
+            }
+            catch (Exception)
+            {
+                return Json(new { success = 0 });
+            }
+        }
+
+        [HttpPost]
         public ActionResult AddJob(string jobString) {
             try {
                 int userId = Convert.ToInt32(Session["UserId"]);

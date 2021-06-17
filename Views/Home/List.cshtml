@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="~/Content/List.css" type="text/css" />
     <title></title>
     <script>
+        let removedId = -1;
+
+        function setRemoved(jobId) {
+            removedId = jobId;
+        }
+
         function signOut() {
             $.ajax({
                 url: '@Url.Action("SignOut", "Home")',
@@ -30,13 +36,33 @@
                 }
             });
         }
+
+        function removeJob(id) {
+            $.ajax({
+                url: '@Url.Action("RemoveJob", "Home")',
+                data: { jobId: id },
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    var result = data.success * 1;
+                    if (result) {
+                        window.location.reload(true);
+                    } else {
+                        showToast("Nie można usunąć");
+                    }
+                },
+                error: function (ex) {
+                    showToast("error");
+                }
+            });
+        }
     </script>
 </head>
 <body>
     <div id="banner">
         <div id="sign_out" onclick="signOut()"><h5>Wyloguj się</h5></div>
     </div>
-    <a class="btn btn-default text-white border" href='@Url.Action("ManageJob", "Home")'>Add</a>
+    <a class="btn btn-default text-white border" href='@Url.Action("ManageJob", "Home")'>Dodaj</a>
     <table class="table table-bordered bg-white">
         <thead class="bg-dark text-white">
             <tr>
@@ -47,23 +73,44 @@
                 <th scope="col">Numer telefonu</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody class="align-middle">
             @foreach (var job in Model.Jobs)
             {
-                <tr>
-                    <td>@job.Id</td>
-                    <td>@job.CarManufacturer</td>
-                    <td>@job.CarModel</td>
-                    <td>@job.ClientName</td>
-                    <td>@job.ClientPhoneNumber</td>
-                    <td><a class="btn btn-default" href="~/Home/Job/@job.Id">Show</a></td>
-                    <td><a class="btn btn-default" href='@Url.Action("ManageJob", "Home", new { jobId = job.Id } )'>Edit</a></td>
-                </tr>
+            <tr>
+                <td>@job.Id</td>
+                <td>@job.CarManufacturer</td>
+                <td>@job.CarModel</td>
+                <td>@job.ClientName</td>
+                <td>@job.ClientPhoneNumber</td>
+                <td><a class="btn btn-default" href="~/Home/Job/@job.Id">Pokaż</a></td>
+                <td><a class="btn btn-default" href='@Url.Action("ManageJob", "Home", new { jobId = job.Id } )'>Edytuj</a></td>
+                @*<td><a class="btn btn-default" style="color: red" onclick="removeJob(@job.Id)">Usuń</a></td>*@
+                <td><button type="button" style="color: red" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#removeJobModal" onclick="setRemoved(@job.Id)">Usuń</button></td>
+            </tr>
             }
         </tbody>
     </table>
+
+    <div class="modal fade" id="removeJobModal" tabindex="-1" aria-labelledby="removeJobModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="removeJobModalLabel">Usuwanie zlecenia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Czy na pewno chcesz usunąć?
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" data-bs-dismiss="modal" onclick="removeJob(removedId)">Tak</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 
