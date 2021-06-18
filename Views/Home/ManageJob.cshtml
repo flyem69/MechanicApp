@@ -69,8 +69,6 @@
                     link = '@Url.Action("EditJob", "Home")';
                     resultHandler = '@Url.Action("Job", "Home", new { id = myId })';
                 }
-                alert(defects);
-                alert(link);
                 $.ajax({
                     url: link,
                     data: { jobString: JSON.stringify(job) },
