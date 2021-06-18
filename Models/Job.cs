@@ -17,5 +17,6 @@ namespace MechanicApp.Models
         public string ClientName { get; set; }
         public string ClientPhoneNumber { get; set; }
         public List<Defect> Defects { get; set; }
+        public string Date { get; set; }
     }
 }

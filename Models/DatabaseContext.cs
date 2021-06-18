@@ -34,6 +34,7 @@ namespace MechanicApp.Models
             job.CarModel = "Jazz";
             job.ClientName = "Jagzam Nicram";
             job.ClientPhoneNumber = "111222333";
+            job.Date = DateTime.Now.ToString("dd.MM.yyyy");
 
             List<Defect> defects = new List<Defect>();
             defects.Add(new Defect("Silnik wyjebało"));
@@ -48,6 +49,7 @@ namespace MechanicApp.Models
             job.CarModel = "Astra GTC";
             job.ClientName = "Piotr Fronczewski";
             job.ClientPhoneNumber = "997213769";
+            job.Date = DateTime.Now.ToString("dd.MM.yyyy");
 
             defects = new List<Defect>();
             defects.Add(new Defect("Hamulce do naprawy"));

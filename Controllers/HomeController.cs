@@ -224,6 +224,7 @@ namespace MechanicApp.Controllers {
                 job.CarModel = (string)jobJSON["CarModel"];
                 job.ClientName = (string)jobJSON["ClientName"];
                 job.ClientPhoneNumber = (string)jobJSON["ClientPhoneNumber"];
+                job.Date = DateTime.Now.ToString("dd.MM.yyyy");
                 JArray defectsJSON = (JArray)jobJSON["Defects"];
                 List<Defect> defects = defectsJSON.Select(d => new Defect((string)d)).ToList();
                 job.Defects = defects;
